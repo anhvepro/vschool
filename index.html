@@ -1,50 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Học Tập</title>
+    <title>Trang chủ</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
+            text-align: center;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: #f4f4f9;
         }
         .container {
-            text-align: center;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
         }
         h1 {
-            color: #2c3e50;
+            color: #333;
         }
-        a {
+        .btn {
             display: inline-block;
-            margin-top: 20px;
-            text-decoration: none;
-            color: white;
-            background-color: #3498db;
             padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
             border-radius: 5px;
-            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
         }
-        a:hover {
-            background-color: #2980b9;
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .form-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #ccc;
+            background-color: white;
+            padding: 20px;
+            z-index: 10;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-popup input {
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+        }
+        .form-popup button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 5;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Chào mừng đến với Trang Học Tập!</h1>
-        <p>Khám phá tài liệu học tập và bài kiểm tra trực tuyến.</p>
-        <a href="#">Bắt đầu ngay</a>
+        <h1>Chào mừng đến với Website học tập</h1>
+        <button class="btn" onclick="openForm('register')">Đăng ký</button>
+        <button class="btn" onclick="openForm('login')">Đăng nhập</button>
     </div>
+
+    <!-- Form Đăng ký -->
+    <div id="registerForm" class="form-popup">
+        <h2>Đăng ký</h2>
+        <input type="text" id="registerName" placeholder="Nhập tên">
+        <input type="email" id="registerEmail" placeholder="Nhập email">
+        <input type="password" id="registerPassword" placeholder="Nhập mật khẩu">
+        <button onclick="register()">Xác nhận</button>
+        <button onclick="closeForm()">Đóng</button>
+    </div>
+
+    <!-- Form Đăng nhập -->
+    <div id="loginForm" class="form-popup">
+        <h2>Đăng nhập</h2>
+        <input type="email" id="loginEmail" placeholder="Nhập email">
+        <input type="password" id="loginPassword" placeholder="Nhập mật khẩu">
+        <button onclick="login()">Xác nhận</button>
+        <button onclick="closeForm()">Đóng</button>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+        // Hàm mở form
+        function openForm(type) {
+            document.getElementById('overlay').style.display = 'block';
+            if (type === 'register') {
+                document.getElementById('registerForm').style.display = 'block';
+            } else if (type === 'login') {
+                document.getElementById('loginForm').style.display = 'block';
+            }
+        }
+
+        // Hàm đóng form
+        function closeForm() {
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Hàm xử lý đăng ký
+        function register() {
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            if (name && email && password) {
+                alert(`Đăng ký thành công! \nTên: ${name}\nEmail: ${email}`);
+                closeForm();
+            } else {
+                alert("Vui lòng điền đầy đủ thông tin!");
+            }
+        }
+
+        // Hàm xử lý đăng nhập
+        function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (email === "test@example.com" && password === "123456") {
+                alert("Đăng nhập thành công!");
+                closeForm();
+            } else {
+                alert("Email hoặc mật khẩu không đúng!");
+            }
+        }
+    </script>
 </body>
 </html>
